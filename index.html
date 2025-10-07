@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TASS Certificates | Tamil Nadu Astronomy and Science Society</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --space-black: #0a0e17;
+            --deep-space: #111827;
+            --nebula-purple: #7e57c2;
+            --nebula-blue: #5e60ce;
+            --nebula-pink: #d81b60;
+            --star-white: #e0e7ff;
+            --glossy-white: rgba(255, 255, 255, 0.15);
+            --glossy-highlight: rgba(255, 255, 255, 0.08);
+            --card-bg: rgba(20, 25, 40, 0.7);
+            --card-border: rgba(126, 87, 194, 0.3);
+        }
+
+        body {
+            background: var(--space-black);
+            color: var(--star-white);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, var(--nebula-purple) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, var(--nebula-blue) 0%, transparent 25%),
+                radial-gradient(circle at 50% 50%, var(--nebula-pink) 0%, transparent 30%);
+            position: relative;
+        }
+
+        /* Cosmic background elements */
+        .cosmic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(1.5px 1.5px at 7px 7px, var(--star-white), transparent 0%),
+                radial-gradient(1px 1px at 15px 15px, var(--star-white), transparent 0%),
+                radial-gradient(0.5px 0.5px at 30px 30px, var(--star-white), transparent 0%);
+            background-size: 20px 20px, 40px 40px, 80px 80px;
+            opacity: 0.7;
+            animation: twinkle 15s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.5; }
+            100% { opacity: 0.9; }
+        }
+
+        .nebula {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, transparent 70%, var(--deep-space) 100%);
+            z-index: -1;
+        }
+
+        /* Header styles */
+        header {
+            text-align: center;
+            padding: 3rem 1rem 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--nebula-purple), var(--nebula-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(126, 87, 194, 0.3);
+            letter-spacing: -1px;
+        }
+
+        .logo i {
+            margin-right: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+            color: var(--star-white);
+            opacity: 0.9;
+            text-shadow: 0 0 10px rgba(94, 96, 206, 0.2);
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--nebula-purple), transparent);
+            width: 200px;
+            margin: 1.5rem auto;
+        }
+
+        /* Certificates container */
+        .certificates-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2.5rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .certificate-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            overflow: hidden;
+            width: 350px;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.7),
+                0 0 40px rgba(126, 87, 194, 0.2);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+            backdrop-filter: blur(4px);
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.8),
+                0 0 50px rgba(126, 87, 194, 0.35);
+        }
+
+        /* Glossy effect */
+        .certificate-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: var(--glossy-white);
+            transform: rotate(30deg);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .certificate-card:hover::before {
+            opacity: 1;
+        }
+
+        .certificate-header {
+            background: linear-gradient(to right, var(--nebula-purple), var(--nebula-blue));
+            padding: 1.2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .certificate-header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--glossy-highlight);
+            transform: skewX(-15deg) translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+
+        .certificate-card:hover .certificate-header::after {
+            transform: skewX(-15deg) translateX(100%);
+        }
+
+        .certificate-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .certificate-issuer {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .certificate-content {
+            padding: 1.5rem;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pdf-container {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .pdf-embed {
+            width: 100%;
+            height: 250px;
+            border: none;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%231e293b"/><path d="M20,20 L80,20 L80,80 L20,80 Z M40,40 L60,40 L60,60 L40,60 Z" fill="none" stroke="%234f46e5" stroke-width="2"/></svg>') center/cover;
+        }
+
+        .certificate-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .date {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .download-btn {
+            background: linear-gradient(to right, var(--nebula-purple), var(--nebula-blue));
+            color: white;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(126, 87, 194, 0.3);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(126, 87, 194, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2.5rem 1rem 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 10;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: white;
+            display: inline-block;
+        }
+
+        .orbit {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 1px solid rgba(126, 87, 194, 0.2);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .orbit:nth-child(2) {
+            width: 300px;
+            height: 300px;
+            animation: orbit 25s linear infinite;
+        }
+
+        .orbit:nth-child(3) {
+            width: 400px;
+            height: 400px;
+            animation: orbit 40s linear infinite reverse;
+        }
+
+        @keyframes orbit {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .certificates-container {
+                gap: 1.5rem;
+                padding: 1.5rem 1rem;
+            }
+            
+            .certificate-card {
+                width: 100%;
+                max-width: 400px;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Animation for certificates */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .certificate-card {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .certificate-card:nth-child(2) {
+            animation-delay: 1s;
+        }
+
+        .certificate-card:nth-child(3) {
+            animation-delay: 2s;
+        }
+    </style>
+</head>
+<body>
+    <div class="cosmic-bg">
+        <div class="stars"></div>
+        <div class="nebula"></div>
+        <div class="orbit"></div>
+        <div class="orbit"></div>
+        <div class="orbit"></div>
+    </div>
+
+    <header>
+        <div class="logo">
+            <i class="fas fa-meteor"></i> TASS Certificates
+        </div>
+        <p class="subtitle">Official certificates from Tamil Nadu Astronomy and Science Society (TASS) - Recognizing excellence in astronomical studies and scientific achievements</p>
+        <div class="divider"></div>
+    </header>
+
+    <main class="certificates-container">
+        <!-- Certificate 1 -->
+        <div class="certificate-card">
+            <div class="certificate-header">
+                <h2 class="certificate-title">Advanced Astronomy Certification</h2>
+                <p class="certificate-issuer">Tamil Nadu Astronomy and Science Society</p>
+            </div>
+            <div class="certificate-content">
+                <div class="pdf-container">
+                    <iframe class="pdf-embed" src="https://docs.google.com/gview?url=https%3A%2F%2Fraw.githubusercontent.com%2Fbhuvanesh-m-dev%2Fcertificates%2Fmain%2Fassets%2FTASS-1.pdf&embedded=true" frameborder="0"></iframe>
+                </div>
+                <div class="certificate-footer">
+                    <div class="date">Issued: October 15, 2023</div>
+                    <button class="download-btn" onclick="window.open('https://raw.githubusercontent.com/bhuvanesh-m-dev/certificates/main/assets/TASS-1.pdf', '_blank')">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certificate 2 -->
+        <div class="certificate-card">
+            <div class="certificate-header">
+                <h2 class="certificate-title">Astrophotography Mastery</h2>
+                <p class="certificate-issuer">Tamil Nadu Astronomy and Science Society</p>
+            </div>
+            <div class="certificate-content">
+                <div class="pdf-container">
+                    <iframe class="pdf-embed" src="https://docs.google.com/gview?url=https%3A%2F%2Fraw.githubusercontent.com%2Fbhuvanesh-m-dev%2Fcertificates%2Fmain%2Fassets%2FTASS-2.pdf&embedded=true" frameborder="0"></iframe>
+                </div>
+                <div class="certificate-footer">
+                    <div class="date">Issued: November 22, 2023</div>
+                    <button class="download-btn" onclick="window.open('https://raw.githubusercontent.com/bhuvanesh-m-dev/certificates/main/assets/TASS-2.pdf', '_blank')">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certificate 3 -->
+        <div class="certificate-card">
+            <div class="certificate-header">
+                <h2 class="certificate-title">Quantum Physics Workshop</h2>
+                <p class="certificate-issuer">Tamil Nadu Astronomy and Science Society</p>
+            </div>
+            <div class="certificate-content">
+                <div class="pdf-container">
+                    <iframe class="pdf-embed" src="https://docs.google.com/gview?url=https%3A%2F%2Fraw.githubusercontent.com%2Fbhuvanesh-m-dev%2Fcertificates%2Fmain%2Fassets%2FTASS-3.pdf&embedded=true" frameborder="0"></iframe>
+                </div>
+                <div class="certificate-footer">
+                    <div class="date">Issued: December 5, 2023</div>
+                    <button class="download-btn" onclick="window.open('https://raw.githubusercontent.com/bhuvanesh-m-dev/certificates/main/assets/TASS-3.pdf', '_blank')">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-logo">
+            <i class="fas fa-globe-asia"></i>
+        </div>
+        <p>Official Certificates from Tamil Nadu Astronomy and Science Society (TASS)</p>
+        <p>© 2023 Tamil Nadu Astronomy and Science Society. All rights reserved.</p>
+        <p>Chennai, Tamil Nadu, India</p>
+    </footer>
+
+    <script>
+        // Initialize the page with subtle animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add subtle pulse animation to the logo
+            const logo = document.querySelector('.logo');
+            setInterval(() => {
+                logo.style.textShadow = '0 0 20px rgba(126, 87, 194, 0.6)';
+                setTimeout(() => {
+                    logo.style.textShadow = '0 0 20px rgba(126, 87, 194, 0.3)';
+                }, 1000);
+            }, 3000);
+            
+            // Add hover effect to certificates
+            const cards = document.querySelectorAll('.certificate-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.zIndex = '10';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.zIndex = '1';
+                });
+            });
+            
+            // Simulate loading effect for PDFs
+            setTimeout(() => {
+                const pdfs = document.querySelectorAll('.pdf-embed');
+                pdfs.forEach(pdf => {
+                    // Remove the placeholder and show the actual PDF
+                    pdf.style.background = 'none';
+                });
+            }, 800);
+        });
+    </script>
+</body>
+</html>
